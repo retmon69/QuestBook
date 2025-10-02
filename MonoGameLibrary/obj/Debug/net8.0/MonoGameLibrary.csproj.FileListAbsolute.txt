@@ -22,3 +22,4 @@ c:\Users\ramon\source\repos\QuestBook\MonoGameLibrary\obj\Debug\net8.0\MonoGameL
 c:\Users\ramon\source\repos\QuestBook\MonoGameLibrary\obj\Debug\net8.0\refint\MonoGameLibrary.dll
 c:\Users\ramon\source\repos\QuestBook\MonoGameLibrary\obj\Debug\net8.0\MonoGameLibrary.pdb
 c:\Users\ramon\source\repos\QuestBook\MonoGameLibrary\obj\Debug\net8.0\ref\MonoGameLibrary.dll
+c:\Users\ramon\source\repos\QuestBook\MonoGameLibrary\obj\Debug\net8.0\MonoGameLibrary.sourcelink.json

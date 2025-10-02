@@ -36,3 +36,4 @@ c:\Users\ramon\source\repos\QuestBook\QuestBook\bin\Debug\net8.0\Content\Images\
 c:\Users\ramon\source\repos\QuestBook\QuestBook\bin\Debug\net8.0\Content\Airal.spritefont.xnb
 c:\Users\ramon\source\repos\QuestBook\QuestBook\bin\Debug\net8.0\Content\Fonts\Arial.xnb
 c:\Users\ramon\source\repos\QuestBook\QuestBook\bin\Debug\net8.0\Content\Fonts\ArialBold.xnb
+c:\Users\ramon\source\repos\QuestBook\QuestBook\obj\Debug\net8.0\QuestBook.sourcelink.json

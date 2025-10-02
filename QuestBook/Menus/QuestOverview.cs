@@ -39,7 +39,7 @@ public class QuestOverview : MainMenu
         for (int i = 0; i < Quests.Count; i++)
         {
             // Quest zeichnen mit Clipping
-            Quests[i].DrawClipped(sb, pos, new QuestInfo("test", "texttest"), new Vector2(5,3), new Vector2(0.7f,0.7f), clipRect);
+            Quests[i].Draw(sb, pos, new QuestInfo("test", "texttest"), new Vector2(5,3), new Vector2(0.7f,0.7f));
             if ((i+1) % 3 == 0)
             {
                 pos.X = 480; 

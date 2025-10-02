@@ -108,43 +108,8 @@ public class Sprite
         Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 position, Rectangle sourceRectangle)
+    public void Draw(SpriteBatch spriteBatch, Rectangle destination, Rectangle sourceRectangle)
     {
-        Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
+        Region.Draw(spriteBatch, destination, sourceRectangle, Color, Rotation, Origin, Effects, LayerDepth);
     }
-    
-        public void DrawClipped(SpriteBatch spriteBatch, Vector2 position, Vector2 scale, Rectangle clipRect, Color? color = null)
-        {
-            int destWidth = (int)(Region.Width * scale.X);
-            int destHeight = (int)(Region.Height * scale.Y);
-
-            Rectangle dest = new Rectangle((int)position.X, (int)position.Y, destWidth, destHeight);
-
-            Rectangle intersect = Rectangle.Intersect(dest, clipRect);
-            if (intersect.IsEmpty) return;
-
-            float u1 = (float)(intersect.X - dest.X) / dest.Width;
-            float v1 = (float)(intersect.Y - dest.Y) / dest.Height;
-            float u2 = (float)intersect.Width / dest.Width;
-            float v2 = (float)intersect.Height / dest.Height;
-
-            Rectangle source = new Rectangle(
-                Region.SourceRectangle.X + (int)(Region.Width * u1),
-                Region.SourceRectangle.Y + (int)(Region.Height * v1),
-                (int)(Region.Width * u2),
-                (int)(Region.Height * v2)
-            );
-
-            spriteBatch.Draw(
-                Region.Texture,
-                intersect,
-                source,
-                color ?? Color.White
-            );
-        }
-
-
-
-
-
 }

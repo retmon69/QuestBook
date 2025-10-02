@@ -92,60 +92,6 @@ public class Border
         Position = position * scale;
         ChangeScale(scale);
     }
-
-public void DrawClipped(SpriteBatch sb, Vector2 borderSize, Vector2 position, Vector2 scale, Rectangle clipRect)
-{
-    int tileW = (int)(128 * scale.X);
-    int tileH = (int)(128 * scale.Y);
-
-    // --- Top Row ---
-    Vector2 tilePos = position;
-    topLeft.DrawClipped(sb, tilePos, scale, clipRect);
-
-    for (int i = 1; i <= borderSize.X - 2; i++)
-    {
-        tilePos = new Vector2(position.X + i * tileW, position.Y);
-        top.DrawClipped(sb, tilePos, scale, clipRect);
-    }
-
-    tilePos = new Vector2(position.X + (borderSize.X - 1) * tileW, position.Y);
-    topRight.DrawClipped(sb, tilePos, scale, clipRect);
-
-    // --- Middle Rows ---
-    for (int j = 1; j <= borderSize.Y - 2; j++)
-    {
-        // Left
-        tilePos = new Vector2(position.X, position.Y + j * tileH);
-        left.DrawClipped(sb, tilePos, scale, clipRect);
-
-        // Center
-        for (int i = 1; i <= borderSize.X - 2; i++)
-        {
-            tilePos = new Vector2(position.X + i * tileW, position.Y + j * tileH);
-            center.DrawClipped(sb, tilePos, scale, clipRect);
-        }
-
-        // Right
-        tilePos = new Vector2(position.X + (borderSize.X - 1) * tileW, position.Y + j * tileH);
-        right.DrawClipped(sb, tilePos, scale, clipRect);
-    }
-
-    // --- Bottom Row ---
-    tilePos = new Vector2(position.X, position.Y + (borderSize.Y - 1) * tileH);
-    bottomLeft.DrawClipped(sb, tilePos, scale, clipRect);
-
-    for (int i = 1; i <= borderSize.X - 2; i++)
-    {
-        tilePos = new Vector2(position.X + i * tileW, position.Y + (borderSize.Y - 1) * tileH);
-        bottom.DrawClipped(sb, tilePos, scale, clipRect);
-    }
-
-    tilePos = new Vector2(position.X + (borderSize.X - 1) * tileW, position.Y + (borderSize.Y - 1) * tileH);
-    bottomRight.DrawClipped(sb, tilePos, scale, clipRect);
-}
-
-
-
     private void ChangeScale(Vector2 scale)
     {
         topLeft.Scale = scale;

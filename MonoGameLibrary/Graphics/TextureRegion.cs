@@ -110,20 +110,17 @@ public class TextureRegion
         );
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth, Rectangle sourceRectangle)
+    public void Draw(SpriteBatch spriteBatch,Rectangle destination, Rectangle sourceRectangle, Color color, float rotation, Vector2 origin, SpriteEffects effects, float layerDepth)
     {
         spriteBatch.Draw(
             Texture,
-            position,
+            destination,
             sourceRectangle,
             color,
-            0f,
-            Vector2.One,
-            scale,
-            SpriteEffects.None,
-            0f
-            
+            rotation,
+            origin,
+            effects,
+            layerDepth
     );
     }
-
 }
