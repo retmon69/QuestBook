@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+    <Texture>images/border</Texture>
+    <Regions>
+        <!-- Ecken -->
+        <Region name="TopLeftCorner"     x="0"   y="0"   width="128" height="128" />
+        <Region name="TopRightCorner"    x="256" y="0"   width="128" height="128" />
+        <Region name="BottomLeftCorner"  x="0"   y="256" width="128" height="128" />
+        <Region name="BottomRightCorner" x="256" y="256" width="128" height="128" />
+
+        <!-- Kanten -->
+        <Region name="Top"    x="128" y="0"   width="128" height="128" />
+        <Region name="Bottom" x="128" y="256" width="128" height="128" />
+        <Region name="Left"   x="0"   y="128" width="128" height="128" />
+        <Region name="Right"  x="256" y="128" width="128" height="128" />
+
+        <!-- Mitte -->
+        <Region name="Center" x="128" y="128" width="128" height="128" />
+    </Regions>
+</TextureAtlas>
