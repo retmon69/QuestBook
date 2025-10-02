@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,14 +29,6 @@ public class Sprite
     public float Rotation { get; set; } = 0.0f;
 
     /// <summary>
-    /// Gets or Sets the scale factor to apply to the x- and y-axes when rendering this sprite.
-    /// </summary>
-    /// <remarks>
-    /// Default value is Vector2.One
-    /// </remarks>
-    public Vector2 Scale { get; set; } = Vector2.One;
-
-    /// <summary>
     /// Gets or Sets the xy-coordinate origin point, relative to the top-left corner, of this sprite.
     /// </summary>
     /// <remarks>
@@ -60,22 +53,6 @@ public class Sprite
     public float LayerDepth { get; set; } = 0.0f;
 
     /// <summary>
-    /// Gets the width, in pixels, of this sprite. 
-    /// </summary>
-    /// <remarks>
-    /// Width is calculated by multiplying the width of the source texture region by the x-axis scale factor.
-    /// </remarks>
-    public float Width => Region.Width * Scale.X;
-
-    /// <summary>
-    /// Gets the height, in pixels, of this sprite.
-    /// </summary>
-    /// <remarks>
-    /// Height is calculated by multiplying the height of the source texture region by the y-axis scale factor.
-    /// </remarks>
-    public float Height => Region.Height * Scale.Y;
-
-    /// <summary>
     /// Creates a new sprite.
     /// </summary>
     public Sprite() { }
@@ -88,6 +65,21 @@ public class Sprite
     {
         Region = region;
     }
+
+    public Sprite(TextureRegion region,
+              Color? color = null,
+              float rotation = 0f,
+              Vector2? origin = null,
+              SpriteEffects effects = SpriteEffects.None,
+              float layerDepth = 0f)
+{
+    Region = region ?? throw new ArgumentNullException(nameof(region));
+    Color = color ?? Color.White;
+    Rotation = rotation;
+    Origin = origin ?? Vector2.Zero;
+    Effects = effects;
+    LayerDepth = layerDepth;
+}
 
 
     /// <summary>
@@ -103,9 +95,9 @@ public class Sprite
     /// </summary>
     /// <param name="spriteBatch">The SpriteBatch instance used for batching draw calls.</param>
     /// <param name="position">The xy-coordinate position to render this sprite at.</param>
-    public void Draw(SpriteBatch spriteBatch, Vector2 position)
+    public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 scale)
     {
-        Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
+        Region.Draw(spriteBatch, position, Color, Rotation, Origin, scale, Effects, LayerDepth);
     }
 
     public void Draw(SpriteBatch spriteBatch, Rectangle destination, Rectangle sourceRectangle)
