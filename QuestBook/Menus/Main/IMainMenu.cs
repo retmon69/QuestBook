@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using MonoGameLibrary.Input;
 using System;
 
-public abstract class MainMenu : Menu
+public interface IMainMenu : IMenu
 {
-    public MainBorder Border;
+    public MainBorder Border { get; set; }
 }

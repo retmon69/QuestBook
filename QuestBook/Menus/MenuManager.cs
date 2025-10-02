@@ -8,40 +8,44 @@ using System;
 
 public class MenuManager
 {
-    public List<Action> links;
-    public Sidebar sidebar;
-    public bool test;
-
-    public QuestOverview questOverview;
+    public List<Button> Links;
+    public List<Quest> Quests;
+    public Sidebar Sidebar;
+    public QuestOverview QuestOverview;
 
     public MenuManager(TextureAtlas atlas, ContentManager content)
     {
-        sidebar = new Sidebar(atlas, content);
-        questOverview = new QuestOverview(atlas, content);
-        links = new List<Action>();
-        links.Add(() => questOverview.Loaded = sidebar.Buttons[0].Active);
-        links.Add(() => test = sidebar.Buttons[1].Active);
-        links.Add(() => test = sidebar.Buttons[2].Active);
-        links.Add(() => test = sidebar.Buttons[3].Active);
-        links.Add(() => test = sidebar.Buttons[4].Active);
-        links.Add(() => test = sidebar.Buttons[5].Active);
+        Links =
+        [
+            new Button(content, atlas, new Rectangle(0, 112, 500, 800), new Rectangle(0, 112, 500, 800), "Quests", Color.Black, () => QuestOverview.Loaded = !QuestOverview.Loaded),
+        ];
+
+        Quests =
+        [
+                new Quest(content, atlas, new Rectangle(600, 20, 1360, 980), new Rectangle(600, 20, 1360, 980), "Test", Color.White),
+        ];
+
+
+        Sidebar = new Sidebar(atlas, new Rectangle(0, 112, 500, 800), new Rectangle(0, 112, 500, 800), Links);
+        QuestOverview = new QuestOverview(atlas, content, Quests, new List<Button>(), new Rectangle(600, 20, 1360, 980), new Rectangle(600, 20, 1360, 980));
+
     }
 
     public void Draw(SpriteBatch sb)
     {
-        sidebar.Draw(sb, new Vector2(0.2f,0.2f), links);
-        if (questOverview.Loaded)
+        Sidebar.Draw(sb);
+        if (QuestOverview.Loaded)
         {
-            questOverview.Draw(sb, new Vector2(0.5f,0.5f), new List<Action>());
+            QuestOverview.Draw(sb);
         }
         
     }
     public void Update(InputManager input)
     {
-        sidebar.Update(input);
-        if (questOverview.Loaded)
+        Sidebar.Update(input);
+        if (QuestOverview.Loaded)
         {
-            questOverview.Update(input);
+            QuestOverview.Update(input);
         }
     }
 }

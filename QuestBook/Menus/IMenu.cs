@@ -6,11 +6,9 @@ using Microsoft.Xna.Framework;
 using System;
 using MonoGameLibrary.Input;
 
-public abstract class Menu
+public interface IMenu : IUiElement
 {
-    public List<Button> Buttons;
-    public bool Loaded = false;
-
-    public abstract void Draw(SpriteBatch sb, Vector2 scale, List<Action> actions);
+    public List<Button> Buttons { get; set; }
+    public bool Loaded {get; set;}
     public abstract void Update(InputManager input);
 }

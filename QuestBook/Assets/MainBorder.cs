@@ -2,9 +2,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Graphics;
 
-public class MainBorder
+public class MainBorder : IUiElement
 {
     public Border Border;
+
+    public Rectangle SourceRectangle { get; set; }
+    public Rectangle Destination { get; set; }
+
+    public Vector2 BorderSize;
     public int X = 410;
     public int Y = 25;
     public int Width = (int)(11 * 128 * 1.07f); 
@@ -13,11 +18,13 @@ public class MainBorder
     public int ScrollOffsetY = 40;
     public MainBorder(TextureAtlas atlas)
     {
-        Border = new Border(atlas);
+        BorderSize = new Vector2(11, 7);
+        Destination = new Rectangle(410, 25, 1520, 950);
+        Border = new Border(atlas, Destination, Destination);
     }
 
     public void Draw(SpriteBatch sb)
     {
-        Border.Draw(sb, new Vector2(11, 7), new Vector2(X, Y), Scale);
+        Border.Draw(sb);
     }
 }

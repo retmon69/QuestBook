@@ -115,7 +115,7 @@ public class TextureRegion
         spriteBatch.Draw(
             Texture,
             destination,
-            sourceRectangle,
+            SourceRectangle,
             color,
             rotation,
             origin,

@@ -7,54 +7,43 @@ using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
 
 
-public class Button
+public class Button : IUiElement
 {
     public TextBox TextBox;
     public Border Border;
-    public Rectangle Bounds;
-
+    public Rectangle SourceRectangle { get; set; }
+    public Rectangle Destination { get; set; }
     public bool WasPressed;
     public bool IsPressed;
     public bool IsHovered;
 
-    public bool Active;
-
     public Action OnClick;
 
-    public Button(Border border, TextBox textBox)
+    public Button(ContentManager content, TextureAtlas atlas, Rectangle sourceRectangle, Rectangle destination, string text, Color textColor, Action onClick)
     {
-        TextBox = textBox;
-        Border = border; 
-        Active = false;
+        Destination = destination;
+        SourceRectangle = sourceRectangle;
+        TextBox = new TextBox(content, sourceRectangle, destination, text, textColor);
+        Border = new Border(atlas, sourceRectangle, destination);
+        OnClick = onClick;
     }
 
-    public void Draw(SpriteBatch sb, Vector2 position, Vector2 scale, Vector2 ButtonSize, string buttonText, Action onClick)
+    public void Draw(SpriteBatch sb)
     {
-        Border.Draw(sb, ButtonSize, position, scale);
-        Bounds = new Rectangle((int)position.X, (int)position.Y, (int)(ButtonSize.X * 128 * scale.X), (int)(ButtonSize.Y * 128 * scale.Y));
-        TextBox.Draw(sb, buttonText, new Vector2(position.X + (64 * 0.3f), position.Y + (16 * 0.7f)), Color.BurlyWood);
-        OnClick = onClick;
-        
+        Border.Draw(sb);
+        TextBox.Draw(sb);
     }
 
     public void Update(InputManager inputManager)
     {
-        IsHovered = Bounds.Contains(inputManager.Mouse.Position) && !inputManager.Mouse.WasButtonJustPressed(MouseButton.Left);
+        IsHovered = Destination.Contains(inputManager.Mouse.Position) && !inputManager.Mouse.WasButtonJustPressed(MouseButton.Left);
 
-        IsPressed = Bounds.Contains(inputManager.Mouse.Position) && inputManager.Mouse.IsButtonDown(MouseButton.Left);
+        IsPressed = Destination.Contains(inputManager.Mouse.Position) && inputManager.Mouse.IsButtonDown(MouseButton.Left);
 
-        WasPressed = Bounds.Contains(inputManager.Mouse.Position) && inputManager.Mouse.WasButtonJustPressed(MouseButton.Left);
+        WasPressed = Destination.Contains(inputManager.Mouse.Position) && inputManager.Mouse.WasButtonJustPressed(MouseButton.Left);
 
         if (WasPressed)
         {
-            if (Active)
-            {
-                Active = false;
-            }
-            else
-            {
-                Active = true;
-            }
             OnClick.Invoke();
         }
     }
