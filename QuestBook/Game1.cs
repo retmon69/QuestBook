@@ -62,7 +62,7 @@ public class Game1 : Core
         //button.Update(Input);
         menuManager.Update(Input);
 
-        button.Update(Input);
+        //button.Update(Input);
 
         base.Update(gameTime);
     }
@@ -80,9 +80,9 @@ public class Game1 : Core
 
         //border.Draw(SpriteBatch);
         //quest.Draw(SpriteBatch, new Vector2(200, 200), new QuestInfo("Test Quest", "Test beschreibung und so"));
-        //menuManager.Draw(SpriteBatch);
+        menuManager.Draw(SpriteBatch);
         //button.Draw(SpriteBatch);
-        textBox.Draw(SpriteBatch);
+        //textBox.Draw(SpriteBatch);
 
         //button.Draw(SpriteBatch, Vector2.One, new Vector2(0.2f,0.2f), new Vector2(4,2), "Tost");
 

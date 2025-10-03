@@ -23,9 +23,11 @@ public class Button : IUiElement
     {
         Destination = destination;
         SourceRectangle = sourceRectangle;
-        TextBox = new TextBox(content, sourceRectangle, destination, text, textColor);
+        TextBox = new TextBox(content, sourceRectangle, new Rectangle(Destination.X, Destination.Y, (int)(Destination.Width * 0.7f), (int)(Destination.Height * 0.7f)), text, textColor);
+        TextBox.ScaleTextToContainer();
+        TextBox.Center(Destination);
         Border = new Border(atlas, sourceRectangle, destination);
-        OnClick = onClick;
+        OnClick = onClick;  
     }
 
     public void Draw(SpriteBatch sb)

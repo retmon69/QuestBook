@@ -66,21 +66,6 @@ public class Sprite
         Region = region;
     }
 
-    public Sprite(TextureRegion region,
-              Color? color = null,
-              float rotation = 0f,
-              Vector2? origin = null,
-              SpriteEffects effects = SpriteEffects.None,
-              float layerDepth = 0f)
-{
-    Region = region ?? throw new ArgumentNullException(nameof(region));
-    Color = color ?? Color.White;
-    Rotation = rotation;
-    Origin = origin ?? Vector2.Zero;
-    Effects = effects;
-    LayerDepth = layerDepth;
-}
-
 
     /// <summary>
     /// Sets the origin of this sprite to the center.

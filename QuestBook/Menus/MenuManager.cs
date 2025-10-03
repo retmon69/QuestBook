@@ -8,26 +8,39 @@ using System;
 
 public class MenuManager
 {
-    public List<Button> Links;
-    public List<Quest> Quests;
+    public List<ButtonInfo> NavigationInfos;
+    public List<QuestInfo> QuestInfos;
     public Sidebar Sidebar;
     public QuestOverview QuestOverview;
 
     public MenuManager(TextureAtlas atlas, ContentManager content)
     {
-        Links =
+        NavigationInfos =
         [
-            new Button(content, atlas, new Rectangle(0, 112, 500, 800), new Rectangle(0, 112, 500, 800), "Quests", Color.Black, () => QuestOverview.Loaded = !QuestOverview.Loaded),
+            new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests"),
+            new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests2"),
+            new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests3"),
+            new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests4"),
+            new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests5"),
+            new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests6")
         ];
 
-        Quests =
+        QuestInfos =
         [
-                new Quest(content, atlas, new Rectangle(600, 20, 1360, 980), new Rectangle(600, 20, 1360, 980), "Test", Color.White),
+            new QuestInfo("Title", "Description"),
+            new QuestInfo("Title2", "Description2"),
+            new QuestInfo("Title3", "Description3"),
+            new QuestInfo("Title4", "Description4"),
+            new QuestInfo("Title5", "Description5"),
+            new QuestInfo("Title6", "Description6"),
+            new QuestInfo("Title7", "Description7"),
+            new QuestInfo("Title8", "Description8"),
+            new QuestInfo("Title9", "Description9"),
         ];
 
 
-        Sidebar = new Sidebar(atlas, new Rectangle(0, 112, 500, 800), new Rectangle(0, 112, 500, 800), Links);
-        QuestOverview = new QuestOverview(atlas, content, Quests, new List<Button>(), new Rectangle(600, 20, 1360, 980), new Rectangle(600, 20, 1360, 980));
+        Sidebar = new Sidebar(atlas, content, new Rectangle(0, 112, 500, 800), new Rectangle(0, 112, 500, 800), NavigationInfos);
+        QuestOverview = new QuestOverview(atlas, content, QuestInfos, new List<Button>(), new Rectangle(600, 20, 1360, 980), new Rectangle(600, 20, 1360, 980));
 
     }
 

@@ -9,21 +9,21 @@ using MonoGameLibrary.Input;
 public class QuestOverview : IMainMenu
 {
     public List<Quest> Quests;
-    private int scrollOffset = 0;
     public MainBorder Border { get; set; }
     public List<Button> Buttons { get; set; }
     public bool Loaded { get; set; }
     public Rectangle SourceRectangle { get; set; }
     public Rectangle Destination { get; set; }
 
-    public QuestOverview(TextureAtlas atlas, ContentManager content, List<Quest> quests, List<Button> buttons, Rectangle sourceRectangle, Rectangle destination)
+    public QuestOverview(TextureAtlas atlas, ContentManager content, List<QuestInfo> questInfos, List<Button> buttons, Rectangle sourceRectangle, Rectangle destination)
     {
-        Quests = quests;
         Border = new MainBorder(atlas);
         Buttons = buttons;
         Loaded = false;
         SourceRectangle = sourceRectangle;
         Destination = destination;
+        Quests = new List<Quest>();
+        AlignQuests(atlas, content, questInfos);
     }
     public QuestOverview()
     {
@@ -43,20 +43,25 @@ public class QuestOverview : IMainMenu
     {
     }
 
-    private void AlignQuests()
+    private void AlignQuests(TextureAtlas atlas, ContentManager content, List<QuestInfo> questInfos)
     {
-        int spacingY = (int)(Border.Destination.Height * 0.1f);
-        int spacingX = (int)(Border.Destination.Width * 0.1f);
+        int spacingY = (int)(Border.Destination.Height * 0.05f);
+        int spacingX = (int)(Border.Destination.Width * 0.05f);
         int width = (int)(Border.Destination.Width * 0.25f);
         int height = (int)(Border.Destination.Height * 0.25f);
-        Point start = new Point(Border.Destination.X, Border.Destination.Y);
-        for (int i = 0; i < Quests.Count; i++)
+        Point start = new Point(Border.Destination.X + spacingX, Border.Destination.Y + spacingY);
+        int rows = 0;
+        int cols = 0;
+        for (int i = 0; i < questInfos.Count; i++)
         {
-            for (int y = 0; y < 3; y++)
+            if (i % 3 == 0 && i != 0)
             {
-                for(int x = 0; x < 3; x++)
-                Quests[i].Destination = new Rectangle(start.X + (x * spacingX), start.Y + (y * spacingX), width, height);
+                rows++;
+                cols = 0;
             }
+            Rectangle rect = new Rectangle(start.X + (spacingX * cols) + (cols * width), start.Y + (rows * spacingY) + (rows * height), width, height);
+            Quests.Add(new Quest(content, atlas, SourceRectangle, rect, questInfos[i], Color.White));
+            cols++;
         }
 
     }
