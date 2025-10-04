@@ -45,11 +45,11 @@ public class QuestOverview : IMainMenu
 
     private void AlignQuests(TextureAtlas atlas, ContentManager content, List<QuestInfo> questInfos)
     {
-        int spacingY = (int)(Border.Destination.Height * 0.05f);
-        int spacingX = (int)(Border.Destination.Width * 0.05f);
-        int width = (int)(Border.Destination.Width * 0.25f);
-        int height = (int)(Border.Destination.Height * 0.25f);
-        Point start = new Point(Border.Destination.X + spacingX, Border.Destination.Y + spacingY);
+        int spacingY = (int)(Border.Destination.Height * 0.03f);
+        int spacingX = (int)(Border.Destination.Width * 0.03f);
+        int width = (int)(Border.Destination.Width * 0.27f);
+        int height = (int)(Border.Destination.Height * 0.27f);
+        Point start = new Point(Border.Destination.X + (spacingX * 2), Border.Destination.Y + (spacingY * 2));
         int rows = 0;
         int cols = 0;
         for (int i = 0; i < questInfos.Count; i++)
