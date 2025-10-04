@@ -22,7 +22,7 @@ public class MenuManager
             new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests3"),
             new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests4"),
             new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests5"),
-            new ButtonInfo(() => QuestOverview.Loaded = !QuestOverview.Loaded, "Quests6")
+
         ];
 
         QuestInfos =

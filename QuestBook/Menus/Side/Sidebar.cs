@@ -47,13 +47,16 @@ public class Sidebar : IMenu
 
     private void AlignButtons(List<ButtonInfo> buttonInfos, ContentManager content, TextureAtlas atlas)
     {
-        int spacing = (int)(Destination.Height * 0.1f);
-        int width = (int)(Destination.Width * 0.7f);
-        int height = (int)((Destination.Height - (spacing * buttonInfos.Count)) / buttonInfos.Count);
-        Point start = new Point((int)(Destination.X + ((Destination.Width / 2) - (width / 2))), (int)(Destination.Y + spacing));
+        float bla = Destination.Height / Border.BorderSize.Y / 128;
+        int borderLength = (int)(50 * bla);
+        int height = (int)((Destination.Height - (2 * borderLength)) / buttonInfos.Count * 0.75);
+        int spacing = (int)((Destination.Height - (2 * borderLength)) / buttonInfos.Count * 0.25);
+        int width = (int)(Destination.Width * 0.65f);
+        
+        Point start = new Point((int)(Destination.X + ((Destination.Width / 2) - (width / 2))), (int)(Destination.Y + borderLength));
         for (int i = 0; i < buttonInfos.Count; i++)
         {
-            Buttons.Add(new Button(content, atlas, SourceRectangle, new Rectangle(start.X, start.Y + (i * spacing), width, height), buttonInfos[i].Text, Color.Black, buttonInfos[i].OnClick));
+            Buttons.Add(new Button(content, atlas, SourceRectangle, new Rectangle(start.X, start.Y + (i * (spacing + height)), width, height), buttonInfos[i].Text, Color.Black, buttonInfos[i].OnClick));
         }
     }
 }
