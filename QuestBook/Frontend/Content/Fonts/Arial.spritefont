@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Graphics="Microsoft.Xna.Framework.Content.Pipeline.Graphics">
+  <Asset Type="Graphics:FontDescription">
+    <!-- Systemfontname ODER Pfad zu einer .ttf im Content (plattform-sicherer) -->
+    <FontName>Arial</FontName>
+    <!-- <FontName>fonts/DejaVuSans.ttf</FontName> -->
+
+    <Size>100</Size>
+    <Spacing>1</Spacing>
+    <UseKerning>true</UseKerning>
+    <Style>Regular</Style>
+
+    <!-- Fallback, falls ein Glyph fehlt (verhindert Crash) -->
+    <DefaultCharacter>?</DefaultCharacter>
+    <!-- alternativ: ▯ (U+25AF) -->
+    <!-- <DefaultCharacter>&#9647;</DefaultCharacter> -->
+
+    <CharacterRegions>
+      <!-- Basis ASCII -->
+      <CharacterRegion>
+        <Start>&#32;</Start>   <!-- space -->
+        <End>&#126;</End>      <!-- ~ -->
+      </CharacterRegion>
+
+      <!-- Latin-1 Supplement: enthält äöüÄÖÜß usw. -->
+      <CharacterRegion>
+        <Start>&#160;</Start>  <!-- 0x00A0 -->
+        <End>&#255;</End>      <!-- 0x00FF -->
+      </CharacterRegion>
+
+      <!-- optional: Euro-Zeichen -->
+      <CharacterRegion>
+        <Start>&#8364;</Start> <!-- € -->
+        <End>&#8364;</End>
+      </CharacterRegion>
+    </CharacterRegions>
+  </Asset>
+</XnaContent>

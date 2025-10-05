@@ -1,0 +1,68 @@
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary.Graphics;
+using Microsoft.Xna.Framework;
+using System;
+using MonoGameLibrary.Input;
+
+public class QuestOverview : IMenu
+{
+    public List<Quest> Quests;
+    public Border Border { get; set; }
+    public List<Button> Buttons { get; set; }
+    public bool Loaded { get; set; }
+    public Rectangle SourceRectangle { get; set; }
+    public Rectangle Destination { get; set; }
+
+    public QuestOverview(TextureAtlas atlas, ContentManager content, List<QuestInfo> questInfos, List<Button> buttons, Rectangle sourceRectangle, Rectangle destination)
+    {
+        Border = new Border(atlas, sourceRectangle, destination);
+        Buttons = buttons;
+        Loaded = false;
+        SourceRectangle = sourceRectangle;
+        Destination = destination;
+        Quests = new List<Quest>();
+        AlignQuests(atlas, content, questInfos);
+    }
+    public QuestOverview()
+    {
+    }
+
+    public void Draw(SpriteBatch sb)
+    {
+        Border.Draw(sb);
+
+        for (int i = 0; i < Quests.Count; i++)
+        {
+            Quests[i].Draw(sb);
+        }
+    }
+
+    public void Update(InputManager input)
+    {
+    }
+
+    private void AlignQuests(TextureAtlas atlas, ContentManager content, List<QuestInfo> questInfos)
+    {
+        int spacingY = (int)(Border.Destination.Height * 0.03f);
+        int spacingX = (int)(Border.Destination.Width * 0.03f);
+        int width = (int)(Border.Destination.Width * 0.27f);
+        int height = (int)(Border.Destination.Height * 0.27f);
+        Point start = new Point(Border.Destination.X + (spacingX * 2), Border.Destination.Y + (spacingY * 2));
+        int rows = 0;
+        int cols = 0;
+        for (int i = 0; i < questInfos.Count; i++)
+        {
+            if (i % 3 == 0 && i != 0)
+            {
+                rows++;
+                cols = 0;
+            }
+            Rectangle rect = new Rectangle(start.X + (spacingX * cols) + (cols * width), start.Y + (rows * spacingY) + (rows * height), width, height);
+            Quests.Add(new Quest(content, atlas, SourceRectangle, rect, questInfos[i], Color.Black));
+            cols++;
+        }
+
+    }
+}

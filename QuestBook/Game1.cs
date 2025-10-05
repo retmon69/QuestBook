@@ -21,6 +21,8 @@ public class Game1 : Core
 
     private TextBox textBox;
 
+    private Keys keys;
+
     public Game1() : base("QuestBook", 1920, 1024, false)
     {
 
@@ -35,7 +37,7 @@ public class Game1 : Core
 
     protected override void LoadContent()
     {
-
+        keys = Keys.A;
 
         TextureAtlas atlas = TextureAtlas.FromFile(Content, "images/border-definition.xml");
 
@@ -60,7 +62,7 @@ public class Game1 : Core
         // TODO: Add your update logic here
 
         //button.Update(Input);
-        menuManager.Update(Input);
+        menuManager.Update(Input, Window);
 
         //button.Update(Input);
 

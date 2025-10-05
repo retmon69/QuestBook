@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Input;
@@ -14,6 +17,9 @@ public class KeyboardInfo
     /// </summary>
     public KeyboardState CurrentState { get; private set; }
 
+    private GameWindow? _window;
+    private readonly Queue<char> _charQueue = new();
+
     /// <summary>
     /// Creates a new KeyboardInfo. 
     /// </summary>
@@ -21,6 +27,40 @@ public class KeyboardInfo
     {
         PreviousState = new KeyboardState();
         CurrentState = Keyboard.GetState();
+    }
+
+    public void Hook(GameWindow window)
+    {
+        if (_window != null) Unhook();
+        _window = window;
+        _window.TextInput += OnTextInput;
+    }
+
+    public void Unhook()
+    {
+        if (_window != null)
+        {
+            _window.TextInput -= OnTextInput;
+            _window = null;
+        }
+    }
+
+    private void OnTextInput(object? sender, TextInputEventArgs e)
+    {
+        if (!char.IsControl(e.Character))
+            _charQueue.Enqueue(e.Character);
+        // Backspace/Enter etc. bei Bedarf hier separat behandeln
+    }
+
+    public bool TryDequeueChar(out char ch)
+    {
+        if (_charQueue.Count > 0)
+        {
+            ch = _charQueue.Dequeue();
+            return true;
+        }
+        ch = default;
+        return false;
     }
 
     /// <summary>
@@ -72,6 +112,5 @@ public class KeyboardInfo
         return CurrentState.IsKeyUp(key) && PreviousState.IsKeyDown(key);
     }
 
-
-
+    public List<Keys> GetPressedKeys() =>  Keyboard.GetState().GetPressedKeys().ToList();
 }
